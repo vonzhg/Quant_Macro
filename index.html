@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI, Machine Learning for Quant Macro</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			line-height: 1.7;
+			background-color: #f8f9fa;
+			color: #343a40;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 950px;
+			margin: 30px auto;
+			padding: 30px 40px;
+			background-color: #ffffff;
+			border-radius: 12px;
+			box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+		}
+		h1 {
+			font-size: 2.4em;
+			color: #003366;
+			border-bottom: 3px solid #0056b3;
+			padding-bottom: 15px;
+			margin-bottom: 20px;
+			font-weight: 700;
+		}
+		h2 {
+			font-size: 1.9em;
+			color: #003366;
+			border-bottom: 2px solid #e9ecef;
+			padding-bottom: 10px;
+			margin-top: 40px;
+			margin-bottom: 25px;
+			font-weight: 600;
+		}
+		h3 {
+			font-size: 1.5em;
+			color: #0056b3;
+			margin-top: 30px;
+			margin-bottom: 15px;
+			font-weight: 600;
+		}
+		h4 {
+			font-size: 1.2em;
+			color: #343a40;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			font-weight: 600;
+		}
+		.instructor-info {
+			background-color: #f8f9fa;
+			border-left: 5px solid #0056b3;
+			padding: 20px 25px;
+			margin-bottom: 30px;
+			border-radius: 0 8px 8px 0;
+		}
+		.instructor-info p {
+			margin: 8px 0;
+			font-size: 1.1em;
+		}
+		.instructor-info a {
+			color: #0056b3;
+			text-decoration: none;
+			font-weight: 500;
+		}
+		.instructor-info a:hover {
+			text-decoration: underline;
+		}
+		p, li {
+			font-size: 1.05em;
+			margin-bottom: 10px;
+		}
+		ul {
+			list-style-type: none;
+			padding-left: 25px;
+		}
+		li {
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 8px;
+		}
+		li::before {
+			content: '•';
+			color: #0056b3;
+			font-weight: bold;
+			display: inline-block;
+			width: 1em;
+			margin-left: -20px;
+			position: absolute;
+			top: 0;
+		}
+		ul ul {
+			margin-top: 8px;
+			padding-left: 20px;
+		}
+		ul ul li::before {
+			content: '–';
+			color: #555;
+			font-weight: normal;
+		}
+		/* Added styles for ToC */
+		.toc {
+			background-color: #f8f9fa;
+			border: 1px solid #e9ecef;
+			border-radius: 8px;
+			padding: 20px 30px;
+			margin-bottom: 30px;
+		}
+		.toc ul {
+			padding-left: 10px;
+		}
+		.toc ul li {
+			padding-left: 0;
+			margin-bottom: 10px;
+		}
+		.toc ul li::before {
+			content: ''; /* Remove default bullet */
+		}
+		.toc a {
+			text-decoration: none;
+			color: #0056b3;
+			font-weight: 500;
+		}
+		.toc a:hover {
+			text-decoration: underline;
+		}
+		.toc ul ul {
+			padding-left: 30px;
+			margin-top: 5px;
+		}
+		.toc ul ul li {
+			margin-bottom: 5px;
+		}
+		.toc ul ul a {
+			color: #343a40;
+			font-weight: 400;
+			font-size: 0.95em;
+		}
+		/* End of ToC styles */
+		code {
+			font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+			background-color: #e9ecef;
+			padding: 3px 6px;
+			border-radius: 5px;
+			font-size: 0.95em;
+		}
+		.philosophy-box {
+			background-color: #fdfdfd;
+			border: 1px solid #e0e0e0;
+			border-left: 5px solid #17a2b8;
+			padding: 20px 25px;
+			margin: 25px 0;
+			border-radius: 0 8px 8px 0;
+		}
+		.philosophy-box h3 {
+			margin-top: 0;
+			color: #17a2b8;
+		}
+		.topic-note {
+			font-style: italic;
+			color: #555;
+			font-size: 0.95em;
+			margin-bottom: 20px;
+		}
+		.hands-on-box {
+			background-color: #fff9f0;
+			border: 2px solid #ff9800;
+			border-radius: 8px;
+			padding: 20px 25px;
+			margin: 20px 0;
+		}
+		.hands-on-box h4 {
+			color: #e65100;
+			margin-top: 0;
+			margin-bottom: 15px;
+			font-size: 1.3em;
+		}
+		.hands-on-section {
+			margin-bottom: 15px;
+		}
+		.hands-on-section strong {
+			color: #d84315;
+			font-size: 1.05em;
+		}
+		.hands-on-section p {
+			margin: 5px 0 10px 0;
+			line-height: 1.6;
+		}
+		/* === NEW Button Style === */
+		.back-to-top {
+			display: inline-block;
+			margin-top: 25px;
+			padding: 8px 15px;
+			background-color: #0056b3;
+			color: #ffffff;
+			text-decoration: none;
+			border-radius: 5px;
+			font-size: 0.9em;
+			font-weight: 500;
+		}
+		.back-to-top:hover {
+			background-color: #003366;
+			color: #ffffff;
+		}
+		.materials-grid {
+			background-color: #f8f9fa;
+			border-radius: 8px;
+			padding: 15px 20px;
+			margin-bottom: 20px;
+		}
+		.materials-grid ul {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 8px;
+			padding-left: 0;
+		}
+		.materials-grid li {
+			padding-left: 25px;
+		}
+		.materials-grid a {
+			color: #0056b3;
+			text-decoration: none;
+			font-weight: 500;
+		}
+		.materials-grid a:hover {
+			text-decoration: underline;
+			color: #003366;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Quant Macro with AI, Machine Learning</h1>
+
+		<div class="instructor-info">
+			<p><strong>Professor:</strong> Zhigang Feng</p>
+			<p><strong>E-mail:</strong> z.feng2@gmail.com</p>
+			<p><strong>Webpage:</strong> <a href="https://sites.google.com/site/zfeng202/" target="_blank" rel="noopener noreferrer">https://sites.google.com/site/zfeng202/</a></p>
+		</div>
+
+		<h2 id="toc">Table of Contents</h2>
+		<div class="toc">
+			<ul>
+				<li><a href="#course-description">Course Description and Learning Objectives</a></li>
+				<li><a href="#materials">Course Materials (Slides & Notebooks)</a></li>
+				<li><a href="#hands-on-philosophy">Hands-On Philosophy: Practicing the "Research Architect"</a></li>
+				<li><a href="#topic-1">Topic 1: Artificial Intelligence for Economics Research</a>
+					<ul><li><a href="#hands-on-1">Hands-On Session: Exploring AI Tools for Economics</a></li></ul>
+				</li>
+				<li><a href="#topic-2">Topic 2: Introduction to Computation for Macroeconomists</a>
+					<ul><li><a href="#hands-on-2">Hands-On Session: Getting Started with Python and Development Environment</a></li></ul>
+				</li>
+				<li><a href="#topic-3">Topic 3: Programming Basics for Economists</a>
+					<ul><li><a href="#hands-on-3">Hands-On Session: Solving a Consumption-Saving Problem</a></li></ul>
+				</li>
+				<li><a href="#topic-4">Topic 4: Numerical Methods for Macroeconomists</a>
+					<ul><li><a href="#hands-on-4">Hands-On Session: Implementing Core Numerical Methods</a></li></ul>
+				</li>
+				<li><a href="#topic-5">Topic 5: Introduction to Machine Learning for Economists</a>
+					<ul><li><a href="#hands-on-5">Hands-On Session: Data Fitting with Neural Networks & API Usage</a></li></ul>
+				</li>
+				<li><a href="#topic-6">Topic 6: Solving Macroeconomic Models Using Machine Learning</a>
+					<ul><li><a href="#hands-on-6">Hands-On Session: Neural Network Solution to the RBC Model</a></li></ul>
+				</li>
+				<li><a href="#topic-7">Topic 7: Numerical Solution Methods for Dynamic Models</a>
+					<ul><li><a href="#hands-on-7">Hands-On Session: Classical RBC Solutions (VFI and EGM)</a></li></ul>
+				</li>
+				<li><a href="#topic-8">Topic 8: Advanced Numerical Methods</a>
+					<ul><li><a href="#hands-on-8">Hands-On Session: Accelerated RBC Solutions, Endogenous Grids Methods</a></li></ul>
+				</li>
+				<li><a href="#topic-9">Topic 9: Perturbation and Projection Methods</a>
+					<ul><li><a href="#hands-on-9">Hands-On Session: Perturbation and Chebyshev Approximation for RBC</a></li></ul>
+				</li>
+				<li><a href="#topic-10">Topic 10: High-Performance and Parallel Computing (HPC)</a>
+					<ul><li><a href="#hands-on-10">Hands-On Session: Parallelizing the RBC VFI Solver</a></li></ul>
+				</li>
+				<li><a href="#topic-11">Topic 11: Heterogeneous Agents Models with Machine Learning</a>
+					<ul><li><a href="#hands-on-11">Hands-On Session: Solving Aiyagari and Krusell-Smith Models</a></li></ul>
+				</li>
+				<li><a href="#topic-12">Topic 12: Heterogeneous-Agent OLG Models (Classic & ML Methods)</a>
+					<ul><li><a href="#hands-on-12">Hands-On Session: Stationary and Dynamic OLG Models</a></li></ul>
+				</li>
+				<li><a href="#topic-13">Topic 13: Asset Pricing with Machine Learning</a>
+					<ul><li><a href="#hands-on-13">Hands-On Session: Replicating GKX (2020) with Neural Networks</a></li></ul>
+				</li>
+				<li><a href="#topic-13">Topic 14: Reinforcement Learning</a>
+					<ul><li><a href="#hands-on-14">Hands-On Session: Actor-Critic for Dynamic Optimization</a></li></ul>
+				</li>
+				<li><a href="#topic-14">Topic 15: Mean Field Games (MFG) in Continuous Time</a>
+					<ul><li><a href="#hands-on-15">Hands-On Session: Finite-Difference Solver for HJB and MFG System</a></li></ul>
+				</li>
+				<li><a href="#topic-15">Topic 16: Large Language Models</a>
+					<ul><li><a href="#hands-on-16">Hands-On Session: Fine-Tuning BERT for Economic Text Analysis</a></li></ul>
+				</li>
+				<li><a href="#references">References</a></li>
+			</ul>
+		</div>
+		<h2 id="course-description">Course Description and Learning Objectives</h2>
+
+		<p><strong>Quick Links:</strong></p>
+		<ul>
+			<li><a href="#materials">Course Materials</a> – Lecture slides and Jupyter notebooks</li>
+			<li><a href="https://sites.google.com/site/zfeng202/" target="_blank" rel="noopener noreferrer">Instructor's Homepage</a> – Additional resources and lecture recordings</li>
+		</ul>
+
+		<h3>Summary</h3>
+		<p>This course prepares economists to thrive in the AI era by fundamentally rethinking the researcher's role: from coder to <strong>Research Architect</strong>. The central premise is that as AI increasingly handles code implementation, the economist's competitive advantage lies in <strong>critical validation and economic safeguarding</strong>—the ability to design algorithms, direct AI tools strategically, and rigorously audit outputs for both technical correctness and economic sensibility.</p>
+		<p>Students will master computational and statistical tools for analyzing structural economic models, integrating traditional methods (dynamic programming, perturbation, projection) with modern AI/ML techniques (deep learning, reinforcement learning). The course emphasizes high-performance computing technologies and uses Python/PyTorch as primary implementation languages. Beyond technical skills, students will explore AI's broader implications for economics, including natural language processing and large language models, with content adapting to reflect the field's rapid evolution.</p>
+		<div class="philosophy-box">
+		<h3>🏛️ The Paradigm Shift: From Coder to Research Architect</h3>
+		<p><strong>The Big Picture:</strong> In the AI era, economic research is undergoing a fundamental transformation. The bottleneck is no longer writing code—it's <em>knowing what code to write, how to validate it works correctly, and ensuring results are economically meaningful</em>. This course trains you to be a <strong>Research Architect</strong>: someone who masters the logic and theory, leverages AI as a powerful implementation assistant, and critically safeguards the entire research pipeline.</p>
+		<p><strong>Your competitive advantage as an economist is not in syntax—it's in:</strong></p>
+		<ul style="margin-top: 10px;">
+		<li>Translating economic problems into precise algorithmic specifications</li>
+		<li>Recognizing when numerical results violate economic principles</li>
+		<li>Auditing AI-generated code for subtle bugs that corrupt economic insights</li>
+		<li>Using AI as a complement to amplify your capabilities, not as a substitute that renders your skills obsolete</li>
+		</ul>
+		<p>This course is structured around <strong>four integrated competencies</strong> that together enable you to flourish in this new paradigm:</p>
+		<ol style="list-style-type: decimal; padding-left: 40px; margin-top: 15px;">
+		<li style="padding-left: 5px; margin-bottom: 15px;"><strong>Competency 1: Theoretical & Algorithmic Mastery</strong>
+		<p style="margin-top: 5px;">Master economic theory and numerical methods <em>on paper, before touching code</em>. This includes core economic models and both conventional computational methods (VFI, perturbation, projection) and ML/RL-based approaches. This human-driven, tool-agnostic logic is your irreplaceable foundation—it cannot be outsourced to AI.</p>
+		</li>
+		<li style="padding-left: 5px; margin-bottom: 15px;"><strong>Competency 2: Technical Fluency & Tool Literacy</strong>
+		<p style="margin-top: 5px;">Develop working knowledge of the modern computational ecosystem:</p>
+		<ul style="margin-top: 8px;">
+		<li><em>Core Programming Concepts:</em> Data structures, syntax, and programming paradigms (object-oriented, procedural, vectorized, multiple dispatch)</li>
+		<li><em>Scientific Stack:</em> NumPy, SciPy, JAX for numerical computing; PyTorch for ML/DL</li>
+		<li><em>Specialized Tools:</em> QuantEcon, EconML, optimization libraries (Gurobi)</li>
+		<li><em>Infrastructure:</em> HPC, parallel computing (MPI, GPU), version control (Git/GitHub), cloud platforms</li>
+		</ul>
+		<p style="margin-top: 8px;"><em>Note:</em> The goal is not to become an expert programmer, but to understand the computational landscape well enough to effectively direct AI tools and critically evaluate their outputs.</p>
+		</li>
+		<li style="padding-left: 5px; margin-bottom: 15px;"><strong>Competency 3: AI-Augmented Implementation</strong>
+		<p style="margin-top: 5px;">Learn to collaborate with AI coding assistants (LLMs) through what we call "specification-driven development": translating your algorithmic logic (Competency 1) into detailed specifications—pseudocode, data structures, objectives—that AI can transform into working code. This dramatically accelerates the idea-to-implementation pipeline while keeping you in the architect role.</p>
+		<p style="margin-top: 8px;"><em>Evolving Landscape:</em> This competency requires continuous updating as new models and techniques emerge roughly every 2-3 months. Course materials will adapt accordingly.</p>
+		</li>
+		<li style="padding-left: 5px; margin-bottom: 15px;"><strong>Competency 4: Critical Validation & Economic Safeguarding</strong>
+		<p style="margin-top: 5px;"><strong>This is the heart of the course and your future role.</strong> You shift from writing code to becoming a rigorous validator:</p>
+		<ul style="margin-top: 8px;">
+		<li><em>Technical Auditing:</em> Debug AI-generated code, verify numerical stability, check convergence properties</li>
+		<li><em>Economic Safeguarding:</em> Use economic intuition to detect when results are implausible, validate comparative statics against theory, ensure policy functions satisfy economic constraints</li>
+		<li><em>Research Integrity:</em> Maintain the intellectual rigor that prevents AI from becoming a sophisticated "garbage generator"</li>
+		</ul>
+		<p style="margin-top: 8px;">This competency determines whether you control AI or are controlled by it—whether you're augmented or replaced.</p>
+		</li>
+		</ol>
+		</div>
+		<h3>🎯 Learning Objectives</h3>
+		<p>This course serves as a catalyst for faculty and graduate students to enhance their quantitative research capabilities. Upon completion, you will be able to:</p>
+		<ul>
+		<li>Analyze complex structural economic models and design appropriate solution algorithms <em>independent of implementation tools</em></li>
+		<li>Strategically direct AI coding assistants to implement computational methods efficiently, while maintaining full control over the research logic</li>
+		<li>Apply modern computational techniques—including ML, deep learning, and reinforcement learning—to high-dimensional dynamic economic problems</li>
+		<li>Leverage HPC technologies (JAX, distributed computing, GPUs) through both direct implementation and AI-assisted development</li>
+		<li><strong>Most importantly:</strong> Rigorously validate computational outputs by auditing code for technical correctness and safeguarding results against economic implausibility</li>
+		<li>Critically evaluate AI advancements (LLMs, automated reasoning) and their implications for the future of economic research</li>
+		</ul>
+		<p><strong>In short:</strong> You will learn to architect research in the AI era—combining irreplaceable economic judgment with powerful computational tools, while never ceding the critical validation role that defines rigorous scholarship.</p>
+		
+		<p style="font-size: 0.9em; font-style: italic; color: #555; margin-top: 20px;">This curriculum has been continuously developed and refined since 2019 through teaching experiences at Zhongnan University of Economics and Law (2021-2024), University of International Business and Economics (2023-2025), Huazhong University of Science and Technology (2019), Iowa State University (2025), University of Miami (2025), and Wuhan University (2024, 2025).</p>
+		
+		<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+
+		<h2 id="materials">Course Materials</h2>
+		
+		<h3>Lecture Slides</h3>
+		<div class="materials-grid">
+			<ul>
+				<li><a href="Slides/Lec_2026_1_AI_v3.pdf" target="_blank">Lecture 1: AI for Economics Research</a></li>
+				<li><a href="Slides/Lec_2026_2_quant_macro.pdf" target="_blank">Lecture 2: Introduction to Quantitative Macro</a></li>
+				<li><a href="Slides/Lec_2026_3_Python_PyTorch.pdf" target="_blank">Lecture 3: Python & PyTorch</a></li>
+				<li><a href="Slides/Lec_2026_3A_AI_Coding.pdf" target="_blank">Lecture 3A: AI-Assisted Coding</a></li>
+				<li><a href="Slides/Lec_2026_4_computation_basics.pdf" target="_blank">Lecture 4: Computation Basics</a></li>
+				<li><a href="Slides/Lec_2026_5_Machine_learning.pdf" target="_blank">Lecture 5: Machine Learning</a></li>
+				<li><a href="Slides/Lec_2026_6_ML_Macro.pdf" target="_blank">Lecture 6: ML for Macro Models</a></li>
+				<li><a href="Slides/Lec_2026_7_Dynamic_models.pdf" target="_blank">Lecture 7: Dynamic Models</a></li>
+				<li><a href="Slides/Lec_2026_8_Advanced_methods_accuarcy.pdf" target="_blank">Lecture 8: Advanced Methods & Accuracy</a></li>
+				<li><a href="Slides/Lec_2026_9_Pert_Proj.pdf" target="_blank">Lecture 9: Perturbation & Projection</a></li>
+			</ul>
+		</div>
+
+		<h3>Jupyter Notebooks (Labs)</h3>
+		<div class="materials-grid">
+			<ul>
+				<li><a href="Notebooks/Lab1_Generic_vs_Specification_Prompting.ipynb" target="_blank">Lab 1: Generic vs. Specification Prompting</a></li>
+				<li><a href="Notebooks/Lab2A_Intro_Computation.ipynb" target="_blank">Lab 2A: Introduction to Computation</a></li>
+				<li><a href="Notebooks/Lab3_Programming_Basics.ipynb" target="_blank">Lab 3: Programming Basics</a></li>
+				<li><a href="Notebooks/Lab4_Numerical_Methods.ipynb" target="_blank">Lab 4: Numerical Methods</a></li>
+				<li><a href="Notebooks/Lab5A_MachineLearning_Basics.ipynb" target="_blank">Lab 5A: Machine Learning Basics</a></li>
+				<li><a href="Notebooks/Lab5B_fomc_minutes_10y_model.ipynb" target="_blank">Lab 5B: FOMC Minutes & 10Y Model</a></li>
+				<li><a href="Notebooks/Lab6A_Dynamic_Models.ipynb" target="_blank">Lab 6A: Dynamic Models (VFI)</a></li>
+				<li><a href="Notebooks/Lab6B_Dynamic_Models.ipynb" target="_blank">Lab 6B: Dynamic Models (Neural Nets)</a></li>
+				<li><a href="Notebooks/Lab7_Numerical_Methods.ipynb" target="_blank">Lab 7: Advanced Numerical Methods</a></li>
+				<li><a href="Notebooks/Lab8_Advanced_Methods.ipynb" target="_blank">Lab 8: Accelerated Methods & EGM</a></li>
+				<li><a href="Notebooks/Lab11A_KS1998_Pytorch.ipynb" target="_blank">Lab 11A: Krusell-Smith (PyTorch)</a></li>
+				<li><a href="Notebooks/Lab12_OLG.ipynb" target="_blank">Lab 12: OLG Models</a></li>
+				<li><a href="Notebooks/Lab13_Asset_pricing.ipynb" target="_blank">Lab 13: Asset Pricing with ML</a></li>
+			</ul>
+		</div>
+		<p class="topic-note">Note: Jupyter notebooks can be viewed directly on GitHub or downloaded and run locally with Python/Anaconda.</p>
+
+		<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+
+		<h2 id="hands-on-philosophy">🏛️ Hands-On Philosophy: Practicing the "Research Architect"</h2>
+		<p>The hands-on sessions are the core component of this course, designed to train you in the "Research Architect" role. In the AI era, your value is not in writing boilerplate code but in your ability to <strong>specify, direct, and validate</strong> complex computational tasks. Our sessions are built around this "specification-driven" workflow.</p>
+		<p>This workflow transforms how we move from economic theory to computational results. Each hands-on exercise, from a simple cake-eating problem to a complex heterogeneous-agent model, follows this structure:</p>
+		<ol style="list-style-type: decimal; padding-left: 40px; margin-top: 15px;">
+			<li style="padding-left: 5px; margin-bottom: 15px;">
+				<strong>Mathematical & Economic Formulation:</strong>
+				<p style="margin-top: 5px;">We start on paper, defining the optimization problem, recursive formulation (e.g., Bellman equation), and economic constraints.</p>
+			</li>
+			<li style="padding-left: 5px; margin-bottom: 15px;">
+				<strong>Algorithmic Specification:</strong>
+				<p style="margin-top: 5px;">We design a clear algorithm and write detailed pseudocode (e.g., Value Function Iteration, Euler-equation-based solver). This is the "human logic" that cannot be outsourced.</p>
+			</li>
+			<li style="padding-left: 5px; margin-bottom: 15px;">
+				<strong>Define Deliverables:</strong>
+				<p style="margin-top: 5px;">We explicitly state our goals. What outputs do we need? A plot of the policy function? A graph showing Euler equation errors? A table of simulated statistics exported to a file?</p>
+			</li>
+			<li style="padding-left: 5px; margin-bottom: 15px;">
+				<strong>AI-Augmented Implementation:</strong>
+				<p style="margin-top: 5px;">We feed this precise specification (Steps 1-3) to an AI assistant (like ChatGPT, Claude, or Copilot) to generate the initial Python/PyTorch code.</p>
+			</li>
+			<li style="padding-left: 5px; margin-bottom: 15px;">
+				<strong>Critical Validation & Expansion:</strong>
+				<p style="margin-top: 5px;"><strong>This is the most crucial step.</strong> We audit the AI's output for technical bugs, economic plausibility, and numerical stability. We then refine the algorithm, expand the model, or enhance the analysis, starting the loop over.</p>
+			</li>
+		</ol>
+		
+		<p>This approach differs fundamentally from static, pre-AI notebooks. The implementation is <strong>live, customizable, and expandable</strong>. You are in an interactive loop with the AI—using it to fill knowledge gaps (e.g., "Explain this PyTorch function") while you simultaneously safeguard the output with your economic and computational judgment.</p>
+		
+		<p>These sessions are designed to prove a critical point: <strong>your background understanding matters.</strong> We will tackle problems where a vague prompt yields a flawed or simple-minded AI response. You will see how providing more detailed, economically-informed instructions and rigorous validation (i.e., being a good Research Architect) allows you to produce more robust, accurate, and sophisticated results.</p>
+		
+		<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+
+
+		<h2>List of Topics</h2>
+		<p class="topic-note">(Subject to change based on field advancements and class interest)</p>
+
+		<h3 id="topic-1">Topic 1: Artificial Intelligence for Economics Research</h3>
+		
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>The Paradigm Shift: From Coder to Research Architect
+				<ul>
+					<li>Four competencies: Theoretical Mastery, Technical Fluency, AI-Augmented Implementation, Critical Validation.</li>
+				</ul>
+			</li>
+			<li>Evolution of AI: Foundations (1950s) → Deep Learning (2010s) → Generative Era (2017–Present).</li>
+			<li>Key Technologies: Machine learning, deep learning, NLP, and LLMs.</li>
+			<li>Two Pillars: Economics <em>of</em> AI vs. AI <em>for</em> Economics.</li>
+			<li>Soft vs. Hard Analysis: AI excels at synthesis; humans remain essential for novel proofs and economic judgment.</li>
+			<li>Applications: Big data, forecasting, causal inference, solving DSGE models, text analysis.</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-1">🛠️ Hands-On Session: Generic vs. Specification-Driven Prompting</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Demonstrate how precise, specification-driven prompts yield superior AI-generated code compared to generic requests.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>Example 1:</strong> Solving the classical optimal growth model (with closed-form solution for validation).</li>
+					<li><strong>Example 2:</strong> Estimating an AR(1) process for TFP shocks.</li>
+					<li><strong>Comparison & Discussion:</strong> Evaluate AI outputs from generic vs. specification-driven prompts for correctness and economic plausibility.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-2">Topic 2: Introduction to Computation for Macroeconomists</h3>
+		
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>What is Quantitative Macroeconomics?
+				<ul>
+					<li>Using numerical methods and computational tools to solve and analyze macroeconomic models.</li>
+					<li>Core methods: dynamic programming, numerical optimization, Monte Carlo simulation.</li>
+				</ul>
+			</li>
+			<li>Workhorse Models in Quantitative Macro:
+				<ul>
+					<li>Neoclassical (stochastic) optimal growth model.</li>
+					<li>Bewley-Aiyagari-Huggett model (incomplete markets).</li>
+					<li>Krusell-Smith model (aggregate uncertainty).</li>
+					<li>Overlapping generations (OLG) models.</li>
+					<li>New Keynesian DSGE models.</li>
+				</ul>
+			</li>
+			<li>Theoretical Foundations for Computing the Optimal Growth Model:
+				<ul>
+					<li>Principle of optimality and recursive formulation.</li>
+					<li>Contraction mapping theorem and Blackwell's sufficient conditions.</li>
+					<li>Theorem of the maximum and dynamic programming.</li>
+					<li>Euler equations and recursive equilibrium.</li>
+				</ul>
+			</li>
+			<li>Numerical Techniques Required:
+				<ul>
+					<li>Function approximation and interpolation (splines, Chebyshev polynomials).</li>
+					<li>Numerical optimization and differentiation.</li>
+					<li>Stochastic process approximation (Tauchen, Rouwenhorst).</li>
+					<li>Linearization, perturbation, and projection methods.</li>
+					<li>Machine learning techniques (DNNs, reinforcement learning).</li>
+					<li>Grid construction and adaptation.</li>
+				</ul>
+			</li>
+			<li>Programming Languages: Python, PyTorch, and the Anaconda ecosystem.</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-2">🛠️ Hands-On Session: Setting Up & First Steps</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Establish a functional Python environment and apply the Research Architect workflow to simulate the Solow growth model.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>The Digital Workshop:</strong> Installing Python (Anaconda) and VS Code.</li>
+					<li><strong>Floating Point Precision:</strong> Demonstrating why $0.1 + 0.2 \neq 0.3$ in computers.</li>
+					<li><strong>Algorithmic Thinking:</strong> Translating the Solow model into pseudocode and Python loops.</li>
+					<li><strong>Vectorization Basics:</strong> Transitioning from loops to NumPy arrays.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-3">Topic 3: Programming Basics for Economists</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Introduction to Python and PyTorch:
+				<ul>
+					<li>Key programming concepts for numerical and AI applications.</li>
+					<li>Variables and Data Types: integers, floats, strings, booleans, lists, dictionaries, tuples.</li>
+					<li>Basic Operations: arithmetic, logical, comparison, and string operations.</li>
+					<li>Functions and Classes:
+						<ul>
+							<li>Defining functions, parameters, return values, and scope.</li>
+							<li>Object-oriented programming basics: classes, methods, inheritance.</li>
+							<li>Lambda functions and functional programming concepts.</li>
+						</ul>
+					</li>
+					<li>Control Structures: if-else statements, for/while loops, list comprehensions.</li>
+					<li>Modules and Packages: importing, creating custom modules, virtual environments.</li>
+					<li>Exception handling and debugging strategies.</li>
+				</ul>
+			</li>
+			<li>NumPy fundamentals:
+				<ul>
+					<li>Array creation, indexing, slicing, and broadcasting.</li>
+					<li>Vectorized operations and performance benefits.</li>
+					<li>Linear algebra operations with <code>numpy.linalg</code>.</li>
+				</ul>
+			</li>
+			<li>Setting up and running machine learning code with ChatGPT or similar AI tools:
+				<ul>
+					<li>Best practices for AI-assisted coding.</li>
+					<li>Code review and validation techniques.</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-3">🛠️ Hands-On Session: Object-Oriented Economics & PyTorch Basics</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Apply Python programming fundamentals to solve a two-period consumption-saving problem. This session bridges the gap between standard economic modeling (using <code>scipy</code>) and modern AI frameworks (introducing <code>PyTorch</code> tensors).</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to organize economic models using Python Classes, perform numerical optimization for intertemporal choice, and execute basic linear algebra operations using both NumPy and PyTorch to understand computational efficiency.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>Object-Oriented Economics:</strong> Creating an <code>Agent</code> class to encapsulate parameters ($\beta$, $r$) and utility functions.</li>
+					<li><strong>Optimization:</strong> Solving the two-period consumption-saving problem using <code>scipy.optimize</code>.</li>
+					<li><strong>Comparative Statics:</strong> Visualizing how optimal consumption changes with interest rates.</li>
+					<li><strong>Intro to PyTorch:</strong> Creating Tensors, understanding the difference between CPU and GPU data structures.</li>
+					<li><strong>The Speed Race:</strong> Benchmarking matrix operations across Pure Python, NumPy, and PyTorch.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+		
+		<h3 id="topic-4">Topic 4: Numerical Methods for Macroeconomists</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Introduction to numerical methods:
+				<ul>
+					<li>Function approximation: polynomial, spline, and piecewise methods.</li>
+					<li>Numerical optimization: gradient-based and derivative-free methods.</li>
+					<li>Root-finding algorithms: bisection, Newton-Raphson, secant method.</li>
+					<li>Interpolation: linear, cubic spline, and shape-preserving methods.</li>
+					<li>Numerical differentiation: forward, backward, and central differences.</li>
+					<li>Numerical integration: quadrature methods (Gaussian, Simpson's rule).</li>
+				</ul>
+			</li>
+			<li>AR(1) Approximation and Numerical Simulation:
+				<ul>
+					<li>Discretization methods: Tauchen, Rouwenhorst methods.</li>
+					<li>Simulation techniques and ergodic distributions.</li>
+					<li>Statistical properties of discretized processes.</li>
+				</ul>
+			</li>
+			<li>Practical examples and implementation in Python:
+				<ul>
+					<li>Using <code>scipy.optimize</code>, <code>scipy.interpolate</code>, and <code>numpy</code>.</li>
+				</ul>
+			</li>
+			<li>Applications to basic economic models:
+				<ul>
+					<li>Consumer optimization problems.</li>
+					<li>Firm production decisions under uncertainty.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-4">🛠️ Hands-On Session: Numerical Methods & Version Control</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Master the "Research Architect" workflow by implementing core numerical algorithms (optimization, root-finding, interpolation) and managing the research code lifecycle using Git and GitHub.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to initialize a Git repository for their research, select and implement appropriate <code>scipy</code> solvers for economic equilibrium and optimization problems, and discretize stochastic processes (AR(1)) for dynamic models.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>Version Control Basics:</strong> Setting up a GitHub repository, creating a <code>.gitignore</code>, and performing the first commit/push cycle.</li>
+					<li><strong>Root-Finding:</strong> Solving for market equilibrium prices in non-linear supply/demand systems using Newton-Raphson (<code>scipy.optimize</code>).</li>
+					<li><strong>Optimization:</strong> Solving a constrained consumer utility maximization problem and validating First Order Conditions (FOCs).</li>
+					<li><strong>Interpolation:</strong> Approximating production functions using Linear vs. Cubic Splines (<code>scipy.interpolate</code>).</li>
+					<li><strong>Stochastic Processes:</strong> Discretizing an AR(1) productivity shock using the Tauchen method and validating moments via simulation.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		
+
+		<h3 id="topic-5">Topic 5: Introduction to Machine Learning for Economists</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>PyTorch for Economists:
+				<ul>
+					<li>Tensors, computational graphs, and automatic differentiation (autograd).</li>
+					<li>Building neural networks with <code>torch.nn</code>.</li>
+					<li>Training loops and optimizers (SGD, Adam, RMSprop, etc.).</li>
+					<li>Using <code>tqdm</code> for progress tracking and performance monitoring.</li>
+					<li>Distributed Data Parallelism (DDP) in PyTorch: Scaling up training for large models or datasets.</li>
+					<li>Device management: CPU vs. GPU computation.</li>
+				</ul>
+			</li>
+			<li>Deep Learning Basics:
+				<ul>
+					<li>Neural network architecture: layers, neurons, and connectivity.</li>
+					<li>Activation functions: ReLU, Sigmoid, Tanh, and their properties.</li>
+					<li>Loss functions: MSE, Cross-Entropy, and custom losses.</li>
+					<li>Gradient descent and backpropagation mechanics.</li>
+					<li>Overfitting, regularization (L1, L2, Dropout), early stopping, and validation strategies.</li>
+					<li>Batch normalization and other normalization techniques.</li>
+				</ul>
+			</li>
+			<li>Economics-Focused Extensions:
+				<ul>
+					<li>Custom loss functions to incorporate economic constraints (utility, equilibrium conditions, monotonicity).</li>
+					<li>Handling panel data or time series with PyTorch.</li>
+					<li>GPU/parallel processing for large-scale economic models.</li>
+					<li>Interpreting neural network predictions in economic contexts.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-5">🛠️ Hands-On Session: Data Fitting with Neural Networks & API Usage</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Build a neural network from scratch using <code>PyTorch</code> to fit synthetic policy functions and real economic data. Learn to fetch data from online APIs (FRED), preprocess it for AI models, and implement a complete machine learning pipeline.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to construct a feedforward neural network using <code>torch.nn.Module</code>, implement a training loop with backpropagation, manage Train/Test splits to prevent overfitting, and interpret model predictions in an economic context.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>The Universal Approximator:</strong> Training a Neural Network to "learn" a known non-linear consumption function (Synthetic Data).</li>
+					<li><strong>Building the Engine:</strong> Writing a custom PyTorch training loop (Forward Pass, Loss Calculation, Backpropagation, Optimizer Step).</li>
+					<li><strong>Real World Data:</strong> Using <code>pandas_datareader</code> to fetch Unemployment and Inflation data from the FRED API.</li>
+					<li><strong>The Phillips Curve:</strong> Training a model to predict Inflation based on Unemployment and visualizing the learned relationship.</li>
+					<li><strong>Validation:</strong> Using Learning Curves (Train vs. Validation Loss) to diagnose overfitting.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-6">Topic 6: Solving Macroeconomic Models Using Machine Learning</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Value Function-Based Approaches:
+				<ul>
+					<li>Deep Neural Network (DNN) Approximation: Representing value and policy functions with neural nets.</li>
+					<li>Value Function Iteration (VFI) under the DNN framework.</li>
+					<li>Introduction to the Actor-Critic algorithm for dynamic optimization.</li>
+					<li>Monte Carlo simulation for policy evaluation.</li>
+					<li>Temporal-Difference (TD) learning in value approximation.</li>
+				</ul>
+			</li>
+			<li>Euler Equation-Based Approaches:
+				<ul>
+					<li>Reformulating the problem as a supervised learning task.</li>
+					<li>Leveraging PyTorch for function approximation and gradient-based methods.</li>
+					<li>Residual minimization techniques.</li>
+					<li>Time iteration vs. policy iteration in neural network context.</li>
+				</ul>
+			</li>
+			<li>Implementation Tips:
+				<ul>
+					<li>Structuring Python/PyTorch code for dynamic models (modularity, reusability).</li>
+					<li>Debugging and performance profiling in large-scale simulations.</li>
+					<li>Parallelization (DDP) and GPU utilization for faster training.</li>
+					<li>Convergence diagnostics and error metrics.</li>
+				</ul>
+			</li>
+			<li>Comparison with traditional methods:
+				<ul>
+					<li>Accuracy, speed, and scalability trade-offs.</li>
+					<li>When to use ML vs. classical methods.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-6">🛠️ Hands-On Session: The Bridge – From VFI to Deep Learning</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Bridge the gap between classical numerical methods and modern AI. First, solve the Stochastic Optimal Growth model using standard Grid-Based Value Function Iteration (VFI) to establish a benchmark. Then, reframe the problem as a supervised learning task and solve it using PyTorch Neural Networks.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will understand the limitations of grid-based methods (Curse of Dimensionality) and how Neural Networks overcome them. They will implement an "Actor-Critic" style architecture where one network approximates the Value Function ($V$) and another approximates the Policy ($\pi$), training them via gradient descent.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>Lab 6A (The Benchmark):</strong> Implementing classical VFI with discretization to find the "True" solution.</li>
+					<li><strong>Lab 6B (The Innovation):</strong> Building a <code>ValueNet</code> and <code>PolicyNet</code> in PyTorch.</li>
+					<li><strong>The Training Loop:</strong> Implementing alternating updates (minimizing Bellman error vs. maximizing expected utility).</li>
+					<li><strong>Comparison:</strong> Overlaying the Neural Network's solution on the Classical VFI solution to validate accuracy.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-7">Topic 7: Numerical Solution Methods for Dynamic Models</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Numerical solutions of dynamic equilibrium models:
+				<ul>
+					<li>Discrete-time dynamic programming fundamentals.</li>
+					<li>Bellman equations and the principle of optimality.</li>
+					<li>Contraction mapping theorem: existence, uniqueness, and convergence rate.</li>
+					<li>State space discretization and approximation theory.</li>
+				</ul>
+			</li>
+			<li>Value function iteration (VFI):
+				<ul>
+					<li>Algorithm implementation and convergence criteria.</li>
+					<li>Grid construction: uniform, logarithmic, Chebyshev nodes.</li>
+					<li>Interpolation schemes: linear, cubic spline, shape-preserving.</li>
+				</ul>
+			</li>
+			<li>Euler equation-based methods (time iteration):
+				<ul>
+					<li>Deriving Euler equations from first-order conditions.</li>
+					<li>Fixed-point iteration on policy functions.</li>
+					<li>Convergence properties and comparison with VFI.</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-7">🛠️ Hands-On Session: Solving the RBC Model with VFI and Time Iteration</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement foundational numerical methods for solving the stochastic growth model using grid-based dynamic programming and Euler equation methods.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to calibrate the RBC model, construct appropriate grids, implement VFI with various interpolation schemes, implement time iteration on Euler equations, and compare approaches in terms of implementation complexity and performance.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Calibrating the RBC model to US business cycle moments.</li>
+					<li>Constructing capital grids and discretizing productivity shocks.</li>
+					<li>Implementing VFI with linear and cubic spline interpolation.</li>
+					<li>Implementing time iteration on the consumption Euler equation.</li>
+					<li>Monitoring convergence and visualizing policy functions.</li>
+					<li>Simulating model economies and computing business cycle statistics.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+		
+		<h3 id="topic-8">Topic 8: Advanced Numerical Methods and Accuracy Assessment</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Acceleration techniques:
+				<ul>
+					<li>Howard's policy improvement algorithm.</li>
+					<li>MacQueen-Porteus bounds.</li>
+					<li>Exploiting monotonicity and concavity in policy functions.</li>
+				</ul>
+			</li>
+			<li>Endogenous Grid Method (EGM):
+				<ul>
+					<li>Inverting the Euler equation to avoid root-finding.</li>
+					<li>Computational gains and extensions.</li>
+				</ul>
+			</li>
+			<li>Accuracy assessment:
+				<ul>
+					<li>Euler equation errors: construction and interpretation.</li>
+					<li>Den Haan-Marcet statistics.</li>
+					<li>Convergence diagnostics and method comparison.</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-8">🛠️ Hands-On Session: Accelerated Solutions and Accuracy Assessment</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement acceleration techniques and the Endogenous Grid Method, and develop rigorous accuracy assessment skills for validating numerical solutions.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to implement Howard's improvement and EGM, compute Euler equation errors across the state space, conduct systematic accuracy comparisons, and select appropriate methods based on problem characteristics.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Implementing Howard's policy improvement and measuring speedups.</li>
+					<li>Exploiting monotonicity via binary search.</li>
+					<li>Implementing EGM for the RBC model.</li>
+					<li>Computing and visualizing Euler equation errors.</li>
+					<li>Sensitivity analysis: grid density, tolerance, interpolation method.</li>
+					<li>Generating impulse responses and verifying economic plausibility.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-9">Topic 9: Perturbation and Projection Methods</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Perturbation methods: 
+				<ul>
+					<li>Euler Equation-Based Methods and deterministic steady states.</li>
+					<li>Expanding around steady states: Taylor series approximation.</li>
+					<li>First-order (linear) and second-order approximations.</li>
+					<li>Blanchard-Kahn conditions for saddle-path stability.</li>
+					<li>Pruning schemes for higher-order approximations.</li>
+					<li>Advantages and limitations: accuracy vs. speed, local vs. global.</li>
+				</ul>
+			</li>
+			<li>Projection methods: 
+				<ul>
+					<li>Global approximation techniques: spectral and finite element methods.</li>
+					<li>The choices of basis functions: polynomials, wavelets, splines.</li>
+					<li>Chebyshev polynomials and orthogonal projection.</li>
+					<li>Smolyak's algorithm for high-dimensional approximation (curse of dimensionality mitigation).</li>
+					<li>Finite element methods: piecewise approximation and adaptivity.</li>
+					<li>Determining coefficients for basis functions: collocation, least-squares, Galerkin.</li>
+					<li>Choosing appropriate weight functions and residual functions.</li>
+					<li>Tensor product grids vs. sparse grids.</li>
+				</ul>
+			</li>
+			<li>Practical applications in macroeconomic modeling:
+				<ul>
+					<li>When to use perturbation vs. projection vs. global methods.</li>
+					<li>Hybrid approaches combining multiple techniques.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-9">🛠️ Hands-On Session: Perturbation and Chebyshev Approximation for RBC</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement first- and second-order perturbation methods and Chebyshev polynomial projection for the RBC model, comparing local and global solution accuracy across different regions of the state space.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to compute linearized and quadratic approximations around steady states, verify Blanchard-Kahn conditions, implement Chebyshev polynomial approximations with collocation, compare accuracy of perturbation vs. projection methods in different state space regions, and determine appropriate solution methods based on problem characteristics.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Computing the deterministic steady state of the RBC model.</li>
+					<li>Deriving and implementing first-order (log-linear) approximation.</li>
+					<li>Checking Blanchard-Kahn conditions for uniqueness and stability.</li>
+					<li>Implementing second-order perturbation with pruning.</li>
+					<li>Generating impulse responses from perturbation solutions.</li>
+					<li>Implementing Chebyshev polynomial approximation for policy functions.</li>
+					<li>Choosing collocation nodes (Chebyshev zeros or extrema).</li>
+					<li>Solving for polynomial coefficients using collocation equations.</li>
+					<li>Comparing accuracy: perturbation vs. Chebyshev vs. VFI across state space.</li>
+					<li>Analyzing errors: near steady state vs. far from steady state.</li>
+					<li>Computational efficiency comparison: solution time and memory usage.</li>
+					<li>Discussing trade-offs: when to use each method in practice.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-10">Topic 10: High-Performance and Parallel Computing (HPC)</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Serial vs. Parallel computing:
+				<ul>
+					<li>Benefits: Time reduction, cost efficiency, and scalability.</li>
+					<li>Challenges: Communication overhead, load balancing, debugging complexity.</li>
+				</ul>
+			</li>
+			<li>Applications in Economics:
+				<ul>
+					<li>Climate-economy models (e.g., Cai and Lontzek 2019).</li>
+					<li>Large-scale heterogeneous agent models.</li>
+					<li>Monte Carlo simulations and policy analysis.</li>
+				</ul>
+			</li>
+			<li>Core Concepts:
+				<ul>
+					<li>HPC architecture: clusters, nodes, and resource management.</li>
+					<li>CPU, cores, and threads: understanding hardware.</li>
+					<li>Shared vs. Distributed memory models.</li>
+					<li>Amdahl's Law and the limits of parallelization.</li>
+					<li>Speedup, efficiency, and strong/weak scaling.</li>
+				</ul>
+			</li>
+			<li>Parallel Programming with MPI (Message Passing Interface):
+				<ul>
+					<li>Master/worker paradigm and task distribution.</li>
+					<li>Basic operations: <code>MPI_Init</code>, <code>MPI_Finalize</code>, <code>MPI_Comm_rank</code>, <code>MPI_Comm_size</code>.</li>
+					<li>Point-to-point communication: <code>MPI_Send</code>, <code>MPI_Recv</code>.</li>
+					<li>Collective communications: <code>MPI_Gather</code>, <code>MPI_Scatter</code>, <code>MPI_Bcast</code>, <code>MPI_Reduce</code>.</li>
+					<li>mpi4py for Python-based MPI programming.</li>
+				</ul>
+			</li>
+			<li>Parallel Computing in PyTorch:
+				<ul>
+					<li>Using the GPU: <code>.to(device)</code> and tensor operations.</li>
+					<li>Data Parallelism: <code>nn.DataParallel</code> (single machine, multi-GPU).</li>
+					<li>Distributed Data Parallelism: <code>nn.DistributedDataParallel</code> (DDP) for multi-node training.</li>
+					<li>Best practices for efficient GPU utilization.</li>
+					<li>Profiling and optimization techniques.</li>
+				</ul>
+			</li>
+			<li>Working with HPC clusters:
+				<ul>
+					<li>SLURM job scheduler: submitting jobs, resource allocation, monitoring.</li>
+					<li>Module systems and environment management.</li>
+					<li>Job arrays and parameter sweeps.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-10">🛠️ Hands-On Session: Parallelizing the RBC VFI Solver</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Parallelize the Value Function Iteration solver for the RBC model using both traditional MPI approaches and modern PyTorch DDP, comparing scalability and efficiency on multi-core and GPU hardware.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to implement parallel VFI using mpi4py with master-worker architecture, parallelize neural network training using PyTorch DDP, submit and manage jobs on HPC clusters with SLURM, measure speedup and efficiency, and select appropriate parallelization strategies based on problem structure and available hardware.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Analyzing the VFI algorithm for parallelization opportunities.</li>
+					<li>Implementing domain decomposition: partitioning the state space across processes.</li>
+					<li>Writing MPI code with mpi4py: distributing grid points to workers.</li>
+					<li>Implementing gather/scatter operations for value function updates.</li>
+					<li>Handling communication overhead and synchronization.</li>
+					<li>Parallelizing neural network VFI with PyTorch DDP.</li>
+					<li>Setting up process groups and distributed training.</li>
+					<li>Implementing data parallelism for batch processing.</li>
+					<li>Writing SLURM submission scripts for CPU and GPU jobs.</li>
+					<li>Running scaling studies: measuring speedup vs. number of cores/GPUs.</li>
+					<li>Analyzing Amdahl's law limitations in practice.</li>
+					<li>Comparing traditional MPI vs. PyTorch DDP: ease of use, performance, scalability.</li>
+					<li>Profiling code to identify bottlenecks (computation vs. communication).</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-11">Topic 11: Heterogeneous Agents Models with Machine Learning</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Core Frameworks:
+				<ul>
+					<li>Aiyagari–Bewley–Huggett models: incomplete markets and idiosyncratic risk.</li>
+					<li>Krusell–Smith models: heterogeneous agents with aggregate shocks.</li>
+					<li>Recursive competitive equilibrium and distribution as state variable.</li>
+				</ul>
+			</li>
+			<li>Traditional Methods:
+				<ul>
+					<li>Computing stationary distributions via discretization and forward iteration.</li>
+					<li>Simulation-based approaches and histogram methods.</li>
+					<li>Interpolation over distributions (moment-based, histogram-based).</li>
+					<li>Challenges and limitations of local approaches in dynamic settings.</li>
+					<li>Computational burden of high-dimensional state spaces.</li>
+				</ul>
+			</li>
+			<li>Machine Learning for Global Solutions:
+				<ul>
+					<li>DeepHAM framework: neural networks to approximate value/policy functions.</li>
+					<li>Handling high-dimensional state spaces (wealth, productivity, aggregate states).</li>
+					<li>Training strategies and loss function design.</li>
+					<li>Use of PyTorch and advanced ML libraries.</li>
+				</ul>
+			</li>
+			<li>Reinforcement Learning Extensions (Feng et al., 2025):
+				<ul>
+					<li>Actor-critic algorithms for end-to-end solution of heterogeneous-agent models.</li>
+					<li>Analytical characterization of distributional dynamics.</li>
+					<li>Simultaneous learning of individual policies and aggregate behavior.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-11">🛠️ Hands-On Session: Solving Aiyagari and Krusell-Smith Models</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement both traditional and ML-based solution methods for heterogeneous agent models, starting with the Aiyagari model and extending to the Krusell-Smith framework with aggregate shocks.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to solve for stationary equilibria in incomplete markets models, compute wealth distributions using forward iteration, implement neural network approximations for high-dimensional state spaces, handle aggregate shocks using Krusell-Smith forecasting rules, and compare traditional vs. ML solution accuracy and computational efficiency.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Setting up the Aiyagari model: preferences, technology, borrowing constraints.</li>
+					<li>Discretizing idiosyncratic productivity shocks.</li>
+					<li>Implementing VFI for individual problem at given interest rate.</li>
+					<li>Computing wealth distribution via forward iteration of the transition matrix.</li>
+					<li>Equilibrium computation: nested fixed-point algorithm over interest rate.</li>
+					<li>Analyzing wealth inequality: Gini coefficients, Lorenz curves.</li>
+					<li>Extending to Krusell-Smith with aggregate productivity shocks.</li>
+					<li>Implementing neural networks to approximate policy functions over (wealth, individual shock, aggregate shock).</li>
+					<li>Learning approximate aggregate laws of motion (ALM) for capital.</li>
+					<li>Training algorithm: alternating between policy learning and ALM updating.</li>
+					<li>Validating solutions: testing accuracy of ALM, Euler equation errors.</li>
+					<li>Simulating model economies and computing impulse responses.</li>
+					<li>Comparing traditional vs. DeepHAM approaches: accuracy, speed, scalability.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-12">Topic 12: Heterogeneous-Agent OLG Models (Classic & ML Methods)</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>The Challenge:
+				<ul>
+					<li>Life-cycle features: finite horizon, age-dependent policies.</li>
+					<li>Inter-generational heterogeneity: cohorts with different characteristics.</li>
+					<li>Intra-generational heterogeneity: idiosyncratic shocks within cohorts.</li>
+				</ul>
+			</li>
+			<li><strong>Part 1: Classic Methods (Idiosyncratic Shocks Only)</strong>
+				<ul>
+					<li>Stationary Recursive Competitive Equilibrium (SRCE) definition.</li>
+					<li>Algorithm: Nested fixed point (outer loop on prices, inner loop on VFI and distribution).</li>
+					<li>Backward induction: solving for optimal policies by age.</li>
+					<li>Distribution computation via transition matrix method (forward iteration).</li>
+					<li>Bilinear interpolation for off-grid points.</li>
+					<li>Market clearing conditions: capital, labor, and goods markets.</li>
+					<li>Deterministic transition dynamics: backward-forward iteration.</li>
+					<li>Tax and transfer system modeling.</li>
+				</ul>
+			</li>
+			<li><strong>Part 2: ML Methods (Aggregate Shocks)</strong>
+				<ul>
+					<li>The challenge: distribution as a high-dimensional state variable.</li>
+					<li>Neural network approximation with a "market clearing layer".</li>
+					<li>Endogenous price determination within the network.</li>
+					<li>Training via minimizing Euler residuals and market clearing errors.</li>
+					<li>Fisher-Burmeister complementarity function for non-negativity constraints.</li>
+					<li>Stabilizing homotopy techniques:
+						<ul>
+							<li>Capital-only models as initialization.</li>
+							<li>Price pre-training for stability.</li>
+							<li>Gradual introduction of government bonds.</li>
+						</ul>
+					</li>
+					<li>Handling lifecycle dimension with age-specific networks or conditioning.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-12">🛠️ Hands-On Session: Stationary and Dynamic OLG Models</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Solve a stationary OLG model with idiosyncratic risk using traditional methods, then apply ML techniques to extend the model to include aggregate uncertainty with bonds and government policy.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to implement backward induction for lifecycle problems, compute stationary distributions across ages and wealth levels, solve for general equilibrium prices, implement neural networks with embedded market clearing conditions, and apply homotopy methods for training stability in complex models.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Setting up a stationary OLG model: demographics, lifecycle income, retirement.</li>
+					<li>Implementing backward induction: solving from terminal age backwards.</li>
+					<li>Computing transition matrix across ages, incorporating survival probabilities.</li>
+					<li>Forward iteration to find stationary distribution over (age, wealth, productivity).</li>
+					<li>Market clearing: iterating on interest rate and wages until equilibrium.</li>
+					<li>Analyzing lifecycle patterns: consumption, saving, wealth accumulation.</li>
+					<li>Extending to include aggregate shocks: productivity and potentially policy shocks.</li>
+					<li>Designing neural network architecture with age-conditioning.</li>
+					<li>Implementing market clearing layer that determines prices endogenously.</li>
+					<li>Custom loss function: weighted combination of Euler errors and market clearing errors.</li>
+					<li>Using Fisher-Burmeister function for complementarity constraints (non-negative consumption).</li>
+					<li>Implementing homotopy training: starting from simpler model, gradually adding complexity.</li>
+					<li>Pre-training on fixed prices, then allowing endogenous price determination.</li>
+					<li>Validating ML solution against traditional methods in stationary case.</li>
+					<li>Simulating transition dynamics following aggregate shocks.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		
+		<h3 id="topic-13">Topic 13: Asset Pricing with Machine Learning</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li><strong>Foundations of Asset Pricing:</strong>
+				<ul>
+					<li>Stochastic Discount Factors (SDF) and Arrow-Debreu securities.</li>
+					<li>The Consumption-CAPM (C-CAPM) and the Lucas Tree model.</li>
+					<li>The Equity Premium Puzzle: Why standard utility functions fail to match historical data.</li>
+				</ul>
+			</li>
+			<li><strong>The Empirical Pivot:</strong>
+				<ul>
+					<li>Linear Factor Models: From Fama-French (3 factors) to the "Factor Zoo" (300+ factors).</li>
+					<li>The curse of dimensionality in empirical finance.</li>
+				</ul>
+			</li>
+			<li><strong>Machine Learning Solutions (The GKX Framework):</strong>
+				<ul>
+					<li>Treating asset pricing as a non-parametric prediction problem ($r_{t+1} = g(z_t) + \epsilon$).</li>
+					<li>The Gu, Kelly, and Xiu (2020) approach: Using Neural Networks to capture non-linearities and interactions.</li>
+					<li>Universal Approximation: Why Deep Learning outperforms OLS and Lasso in return prediction.</li>
+				</ul>
+			</li>
+			<li><strong>Performance Evaluation:</strong>
+				<ul>
+					<li>Out-of-sample $R^2$ metrics for financial data.</li>
+					<li>Constructing efficient frontiers and analyzing Sharpe Ratios of ML-driven portfolios.</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<div class="hands-on-box">
+			<h4 id="hands-on-13">🛠️ Hands-On Session: Replicating GKX (2020) with Neural Networks</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement a deep learning pipeline to predict excess stock returns using high-dimensional firm characteristic data, directly replicating the methodology of Gu, Kelly, and Xiu (2020).</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to preprocess financial panel data, design a Feedforward Neural Network using PyTorch to handle hundreds of predictors, avoid "look-ahead bias" during training, and construct a long-short portfolio to benchmark ML performance against standard Fama-French models.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li><strong>Data Management:</strong> Handling the "Factor Zoo"—preprocessing 90+ firm characteristics and macro state variables.</li>
+					<li><strong>The Baseline:</strong> Running standard OLS and Penalized Regression (Elastic Net) to establish a performance floor.</li>
+					<li><strong>Network Design:</strong> Building a 3-layer Neural Network in PyTorch with ReLU activations and Dropout for regularization.</li>
+					<li><strong>Training Strategy:</strong> Implementing a rolling-window training scheme to respect the time-series nature of finance (no future data in training set).</li>
+					<li><strong>Portfolio Construction:</strong> Sorting stocks by predicted return deciles and calculating the realized Sharpe Ratio of the Long (Top 10%) minus Short (Bottom 10%) strategy.</li>
+					<li><strong>Analysis:</strong> Visualizing which characteristics drive the Neural Network's predictions (Variable Importance).</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+		
+		<h3 id="topic-14">Topic 14: Reinforcement Learning</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Reinforcement Learning (RL) for Economics:
+				<ul>
+					<li>Framework for sequential decision-making under uncertainty.</li>
+					<li>Natural fit for dynamic optimization and control problems.</li>
+					<li>Agent, environment, state, action, reward structure.</li>
+				</ul>
+			</li>
+			<li>Markov Decision Processes (MDPs):
+				<ul>
+					<li>Formal framework: states, actions, transition probabilities, rewards.</li>
+					<li>Policies, value functions, and optimal policies.</li>
+					<li>Bellman optimality equations.</li>
+				</ul>
+			</li>
+			<li>From MDPs to Monte Carlo and Temporal-Difference (TD) Methods:
+				<ul>
+					<li>Value function estimation with episodic (Monte Carlo) updates.</li>
+					<li>Incremental (TD) updates: TD(0), TD(λ).</li>
+					<li>Exploration–exploitation trade-offs and ε-greedy policies.</li>
+					<li>On-policy vs. off-policy learning (SARSA vs. Q-learning).</li>
+					<li>Ensuring learning stability and convergence.</li>
+				</ul>
+			</li>
+			<li>Function Approximation and Deep RL:
+				<ul>
+					<li>Neural networks for high-dimensional value and policy functions.</li>
+					<li>Deep Q-Networks (DQN) and experience replay.</li>
+					<li>Policy gradient methods: REINFORCE, advantage estimation.</li>
+					<li>Actor-critic architectures for continuous state/action spaces.</li>
+					<li>Proximal Policy Optimization (PPO) and Trust Region methods.</li>
+					<li>Deterministic Policy Gradient (DPG) and DDPG.</li>
+				</ul>
+			</li>
+			<li>RL in Economic Applications:
+				<ul>
+					<li>Optimal taxation and fiscal policy.</li>
+					<li>Monetary policy design.</li>
+					<li>Portfolio management and trading strategies.</li>
+					<li>Market design and mechanism design.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-14">🛠️ Hands-On Session: Actor-Critic for Dynamic Optimization</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement a complete actor-critic algorithm to solve a dynamic economic optimization problem, understanding the interplay between policy and value learning, and applying this to optimal consumption-saving or policy design problems.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to formulate economic problems as MDPs, implement actor and critic neural networks, design appropriate reward functions that capture economic objectives, implement policy gradient updates with baseline subtraction, diagnose and address training instabilities, and compare RL-based solutions with traditional DP approaches.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Formulating a consumption-saving problem as an MDP: state (wealth, shocks), actions (consumption), rewards (utility).</li>
+					<li>Implementing the critic network to estimate value functions.</li>
+					<li>Implementing the actor network to parameterize stochastic policies.</li>
+					<li>Designing the training loop: collecting experience, computing returns, updating networks.</li>
+					<li>Computing advantage estimates for variance reduction.</li>
+					<li>Implementing policy gradient with baseline (actor update).</li>
+					<li>Implementing TD learning for critic update.</li>
+					<li>Handling exploration: entropy regularization or stochastic policies.</li>
+					<li>Monitoring training: returns, policy entropy, loss trajectories.</li>
+					<li>Diagnosing issues: high variance, poor convergence, suboptimal policies.</li>
+					<li>Comparing with VFI solution: accuracy, computation time, ease of implementation.</li>
+					<li>Extending to continuous action spaces (if time permits).</li>
+					<li>Application: designing optimal tax policies as an RL problem.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-15">Topic 15: Mean Field Games (MFG) in Continuous Time</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Motivation:
+				<ul>
+					<li>Heterogeneous agents and the "curse of dimensionality".</li>
+					<li>Mean field approximation: representing aggregate behavior.</li>
+					<li>Applications in economics: large populations, anonymous interactions.</li>
+				</ul>
+			</li>
+			<li>The Core MFG Feedback Loop:
+				<ul>
+					<li>Individual optimization given mean field (distribution of others).</li>
+					<li>Aggregate behavior determines the mean field.</li>
+					<li>Consistency condition: individual optimization → aggregate behavior → mean field.</li>
+				</ul>
+			</li>
+			<li>The Engine Room: A Tale of Two Equations:
+				<ul>
+					<li><strong>Hamilton-Jacobi-Bellman (HJB):</strong> Individual optimization problem (solves backward in time).</li>
+					<li><strong>Kolmogorov Forward Equation (KFE):</strong> Distribution evolution (solves forward in time).</li>
+					<li>Coupled system: policy from HJB affects drift in KFE, distribution from KFE affects HJB.</li>
+				</ul>
+			</li>
+			<li>Numerical Solution for HJB:
+				<ul>
+					<li>The <strong>Upwind Scheme:</strong> finite difference method for handling controlled drift.</li>
+					<li>Choosing between forward and backward differences based on drift direction.</li>
+					<li>Stability and convergence properties.</li>
+				</ul>
+			</li>
+			<li>The MFG System and Duality:
+				<ul>
+					<li>Relationship between HJB and KFE operators: <code>A<sup>T</sup></code> (matrix transpose).</li>
+					<li>Variational formulation and optimality conditions.</li>
+				</ul>
+			</li>
+			<li>Algorithm for Stationary Equilibrium:
+				<ul>
+					<li>Iterating on HJB (given distribution), KFE (given policy), and prices.</li>
+					<li>Fixed-point iteration and convergence criteria.</li>
+				</ul>
+			</li>
+			<li>Transition Dynamics:
+				<ul>
+					<li>The backward-forward shooting algorithm.</li>
+					<li>Solving for equilibrium paths between steady states.</li>
+					<li>Boundary conditions and terminal conditions.</li>
+				</ul>
+			</li>
+			<li>Applications in Economics:
+				<ul>
+					<li>Dynamic models of income and wealth inequality.</li>
+					<li>Optimal taxation in large populations.</li>
+					<li>Financial markets with heterogeneous traders.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-15">🛠️ Hands-On Session: Finite-Difference Solver for HJB and MFG System</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Implement a finite-difference solver using the upwind scheme for a simple HJB equation, then extend to solve a complete mean field game system by iteratively coupling HJB and KFE equations.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to discretize continuous-time HJB equations using finite differences, implement the upwind scheme for drift terms, solve KFE for distribution evolution, couple HJB and KFE in a fixed-point algorithm, compute stationary mean field equilibria, and understand the connection between individual optimization and aggregate outcomes in large populations.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Setting up a simple continuous-time consumption-saving problem (Merton problem).</li>
+					<li>Discretizing the state space (wealth) using finite-difference grid.</li>
+					<li>Deriving the HJB equation with controlled drift and diffusion.</li>
+					<li>Implementing the upwind scheme: choosing forward/backward differences by drift sign.</li>
+					<li>Solving the HJB equation iteratively (value function iteration in continuous time).</li>
+					<li>Extracting optimal policy (consumption) from value function derivatives.</li>
+					<li>Implementing the KFE to compute stationary distribution.</li>
+					<li>Understanding matrix transpose relationship between HJB and KFE operators.</li>
+					<li>Solving KFE as a system of linear equations with normalization.</li>
+					<li>Extending to mean field game: adding aggregate effects (e.g., interest rate depends on aggregate wealth).</li>
+					<li>Implementing fixed-point iteration: solve HJB → extract policy → solve KFE → update aggregate → repeat.</li>
+					<li>Monitoring convergence: policy functions, distributions, and prices.</li>
+					<li>Computing stationary equilibrium and analyzing wealth distribution.</li>
+					<li>Implementing transition dynamics (if time permits): backward-forward shooting.</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h3 id="topic-16">Topic 16: Large Language Models</h3>
+		<h4>Conceptual Content</h4>
+		<ul>
+			<li>Introduction to LLMs:
+				<ul>
+					<li>Relevance of text analysis in economics: policy documents, corporate filings, news, social media.</li>
+					<li>Key concepts: Transformer architecture basics, autoregressive generation.</li>
+					<li>Evolution: from Word2Vec to BERT to GPT to modern LLMs.</li>
+				</ul>
+			</li>
+			<li>Representing Text Numerically:
+				<ul>
+					<li>Tokenization strategies: word-level, subword (BPE, WordPiece), character-level.</li>
+					<li>Vocabulary construction and out-of-vocabulary handling.</li>
+					<li>Word embeddings: TF-IDF, Word2Vec, GloVe—mechanisms and economic applications.</li>
+					<li>Applications: Economic Policy Uncertainty (EPU) index, inflation forecasting, gender norms in language.</li>
+					<li>Positional encodings for sequence awareness (sinusoidal, learned).</li>
+				</ul>
+			</li>
+			<li>The Transformer Architecture:
+				<ul>
+					<li>Core mechanism: Self-attention (Queries, Keys, Values).</li>
+					<li>Multi-head attention: parallel attention mechanisms.</li>
+					<li>Scaled dot-product attention and computational efficiency.</li>
+					<li>Supporting components: feed-forward networks, residual connections, layer normalization.</li>
+					<li>Encoder-decoder vs. decoder-only architectures.</li>
+					<li>Comparison: advantages over static embeddings and topic models (LDA, NMF).</li>
+				</ul>
+			</li>
+			<li>LLMs in Practice:
+				<ul>
+					<li>Model scale and examples: GPT series, BERT, T5, LLaMA.</li>
+					<li>Text generation process: greedy decoding, beam search, sampling strategies.</li>
+					<li>Training: pre-training fundamentals (self-supervised learning on large corpora).</li>
+					<li>Fine-tuning for domain-specific tasks: classification, named entity recognition, question answering.</li>
+					<li>Prompt engineering and in-context learning.</li>
+					<li>Reinforcement learning from human feedback (RLHF).</li>
+				</ul>
+			</li>
+			<li>LLMs in Economics Research:
+				<ul>
+					<li>Applications:
+						<ul>
+							<li>Advanced sentiment/policy analysis: central bank communications, FOMC minutes.</li>
+							<li>Innovation measurement: analyzing patents and R&D documents.</li>
+							<li>Forecasting enhancements: incorporating textual data.</li>
+							<li>Event studies: measuring market reactions to news.</li>
+						</ul>
+					</li>
+					<li>Integrating LLM outputs (e.g., sentiment scores, text features) into economic models.</li>
+					<li>Causal inference with textual instruments.</li>
+					<li>Limitations and challenges: bias, interpretability, computational cost.</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="hands-on-box">
+			<h4 id="hands-on-16">🛠️ Hands-On Session: Fine-Tuning BERT for Economic Text Analysis</h4>
+			<div class="hands-on-section">
+				<strong>Objective:</strong>
+				<p>Use the Hugging Face Transformers library to fine-tune a pre-trained BERT model for sentiment analysis of central bank communications, learning the complete pipeline from data preparation to model deployment.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Learning Outcome:</strong>
+				<p>Students will be able to access and load pre-trained transformer models from Hugging Face, prepare text data for transformer training (tokenization, padding, batching), fine-tune models on custom economic datasets, evaluate model performance with appropriate metrics, apply trained models to new texts for economic analysis, and integrate text-based features into economic research.</p>
+			</div>
+			<div class="hands-on-section">
+				<strong>Activities:</strong>
+				<ul>
+					<li>Introduction to Hugging Face ecosystem: models, datasets, tokenizers.</li>
+					<li>Loading a pre-trained BERT model and tokenizer.</li>
+					<li>Preparing a dataset: FOMC statements, central bank speeches, or financial news.</li>
+					<li>Creating sentiment labels (manual annotation or using distant supervision).</li>
+					<li>Tokenizing texts: handling special tokens, attention masks, padding.</li>
+					<li>Creating PyTorch DataLoaders for training and validation.</li>
+					<li>Setting up the fine-tuning loop: optimizer, learning rate scheduler, loss function.</li>
+					<li>Training the model: monitoring loss, accuracy, and validation metrics.</li>
+					<li>Implementing early stopping and model checkpointing.</li>
+					<li>Evaluating model performance: confusion matrix, F1 score, ROC curves.</li>
+					<li>Applying the fine-tuned model to classify new texts.</li>
+					<li>Extracting sentiment time series from historical documents.</li>
+					<li>Analyzing relationship between text-based sentiment and economic outcomes (market reactions, policy changes).</li>
+					<li>Visualizing attention weights to interpret model decisions.</li>
+					<li>Discussing integration into economic models: sentiment as a state variable or shock.</li>
+					<li>Extension (if time permits): comparing BERT with simpler methods (word counts, dictionaries).</li>
+				</ul>
+			</div>
+			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<h2 id="references">References</h2>
+		<ul style="padding-left: 25px; list-style-type: disc;">
+			<li style="padding-left: 0; margin-bottom: 8px;">Judd, Kenneth. <em>Numerical Method in Economics</em>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;">Ljungqvist, Lars, and Thomas J. Sargent. <em>Recursive Macroeconomic Theory</em>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;">Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. <em>Deep Learning</em>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;">Bertsekas, Dimitri. <em>Reinforcement Learning and Optimal Control</em>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;">Feng, Zhigang. <a href="https://sites.google.com/site/zfeng202/ml"><em>Machine Learning for Quantitative Macro</em></a>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;">Santos, Manuel S. <a href="https://www.sciencedirect.com/science/chapter/handbook/abs/pii/S1574004899010083"><em>Numerical Solution of Dynamic Economic Models</em></a>.</li>
+			<li style="padding-left: 0; margin-bottom: 8px;"><a href="https://quantecon.org/lectures/" target="_blank" rel="noopener noreferrer">QuantEcon Lectures (https://quantecon.org/lectures/)</a></li>
+		</ul>
+		<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+
+	</div>
+</body>
+</html>
