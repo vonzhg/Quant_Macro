@@ -257,8 +257,20 @@
 			text-decoration: underline;
 			color: #003366;
 		}
+		.top-hero {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			gap: 20px;
+			align-items: start;
+			margin-bottom: 18px;
+		}
+		.top-left h1 {
+			margin-top: 0;
+		}
 		.cover-hero {
-			margin: 6px 0 24px 0;
+			margin: 0;
+			width: 75%;
+			justify-self: end;
 			border-radius: 12px;
 			overflow: hidden;
 			border: 1px solid #d9e2ec;
@@ -277,33 +289,31 @@
 			background: #f8fbff;
 			border-top: 1px solid #e5edf5;
 		}
+		@media (max-width: 900px) {
+			.top-hero {
+				grid-template-columns: 1fr;
+			}
+			.cover-hero {
+				width: 100%;
+			}
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>Quant Macro with AI, Machine Learning</h1>
-		<div class="cover-hero">
-			<img src="ML_cover.png" alt="Course cover: Quant Macro with AI and Machine Learning">
-			<div class="cover-caption">AI, Machine Learning, and Computational Methods for Quantitative Macroeconomics</div>
-		</div>
-
-		<div class="instructor-info">
-			<p><strong>Professor:</strong> Zhigang Feng</p>
-			<p><strong>E-mail:</strong> z.feng2@gmail.com</p>
-			<p><strong>Webpage:</strong> <a href="https://sites.google.com/site/zfeng202/" target="_blank" rel="noopener noreferrer">https://sites.google.com/site/zfeng202/</a></p>
-		</div>
-
-		<div class="instructor-info" style="border-left-color: #17a2b8;">
-			<p><strong>Acknowledgments:</strong> This course has been developed through teaching experience at the following institutions (alphabetical order):</p>
-			<ul style="margin: 10px 0 0 0; padding-left: 20px;">
-				<li>Huazhong University of Science and Technology</li>
-				<li>Iowa State University</li>
-				<li>University of International Business and Economics</li>
-				<li>University of Miami</li>
-				<li>Wuhan University</li>
-				<li>Xiamen University</li>
-				<li>Zhongnan University of Economics and Law</li>
-			</ul>
+		<div class="top-hero">
+			<div class="top-left">
+				<h1>Quant Macro with AI, Machine Learning</h1>
+				<div class="instructor-info">
+					<p><strong>Professor:</strong> Zhigang Feng</p>
+					<p><strong>E-mail:</strong> z.feng2@gmail.com</p>
+					<p><strong>Webpage:</strong> <a href="https://sites.google.com/site/zfeng202/" target="_blank" rel="noopener noreferrer">https://sites.google.com/site/zfeng202/</a></p>
+				</div>
+			</div>
+			<div class="cover-hero">
+				<img src="ML_cover.png" alt="Course cover: Quant Macro with AI and Machine Learning">
+				
+			</div>
 		</div>
 
 		<h2 id="toc">Table of Contents</h2>
@@ -1592,6 +1602,27 @@
 			<li style="padding-left: 0; margin-bottom: 8px;">Santos, Manuel S. <a href="https://www.sciencedirect.com/science/chapter/handbook/abs/pii/S1574004899010083"><em>Numerical Solution of Dynamic Economic Models</em></a>.</li>
 			<li style="padding-left: 0; margin-bottom: 8px;"><a href="https://quantecon.org/lectures/" target="_blank" rel="noopener noreferrer">QuantEcon Lectures (https://quantecon.org/lectures/)</a></li>
 		</ul>
+
+		<h2>Acknowledgments</h2>
+		<div class="instructor-info" style="border-left-color: #17a2b8;">
+			<p><strong>Acknowledgments:</strong> I gratefully acknowledge insightful discussions with Dr. Yaolang Zhong (University of Tokyo), Dr. Marlon Azinovic-Yang (UNC Chapel Hill), Dr. Shenghao Zhu, Dr. Yucheng Yang, and Dr. Jiequn Han, among others, as well as teaching experiences at the universities listed below.</p>
+			<ul style="margin: 10px 0 0 0; padding-left: 20px;">
+				<li><a href="https://github.com/YaolangZhong/U_Tokyo_Comp_Econ_Course" target="_blank" rel="noopener noreferrer">Dr. Yaolang Zhong</a> (University of Tokyo)</li>
+				<li><a href="https://sites.google.com/view/marlonazinovic/home" target="_blank" rel="noopener noreferrer">Dr. Marlon Azinovic-Yang</a> (UNC Chapel Hill)</li>
+				<li><a href="https://shenghaozhu.weebly.com/" target="_blank" rel="noopener noreferrer">Dr. Shenghao Zhu</a> (University of International Business and Economics)</li>
+				<li><a href="https://sites.google.com/site/yangyucheng1993/home" target="_blank" rel="noopener noreferrer">Dr. Yucheng Yang</a> (University of Zurich)</li>
+				<li><a href="https://users.flatironinstitute.org/~jhan/" target="_blank" rel="noopener noreferrer">Dr. Jiequn Han</a> (Flatiron Institute)</li>
+			</ul>
+			<ul style="margin: 8px 0 0 0; padding-left: 20px;">
+				<li>Huazhong University of Science and Technology</li>
+				<li>Iowa State University</li>
+				<li>University of International Business and Economics</li>
+				<li>University of Miami</li>
+				<li>Wuhan University</li>
+				<li>Xiamen University</li>
+				<li>Zhongnan University of Economics and Law</li>
+			</ul>
+		</div>
 		<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
 
 	</div>
