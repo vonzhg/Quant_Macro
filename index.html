@@ -141,6 +141,32 @@
 			font-weight: 400;
 			font-size: 0.95em;
 		}
+		.toc a.highlight-link {
+			color: #9a3412;
+			font-weight: 700;
+		}
+		.highlight-badge {
+			display: inline-block;
+			background-color: #ff9800;
+			color: #ffffff;
+			font-size: 0.72em;
+			font-weight: 700;
+			padding: 2px 8px;
+			border-radius: 999px;
+			vertical-align: middle;
+			margin-right: 8px;
+		}
+		.topic-highlight {
+			background-color: #fff8e8;
+			border: 2px solid #ffcc80;
+			border-radius: 10px;
+			padding: 16px 22px 6px 22px;
+			margin: 18px 0 24px 0;
+		}
+		.topic-highlight h3 {
+			color: #b45309;
+			margin-top: 5px;
+		}
 		/* End of ToC styles */
 		code {
 			font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -267,6 +293,12 @@
 				<li><a href="#topic-3">Topic 3: Programming Basics for Economists</a>
 					<ul><li><a href="#hands-on-3">Hands-On Session: Solving a Consumption-Saving Problem</a></li></ul>
 				</li>
+				<li><a class="highlight-link" href="#topic-3a"><span class="highlight-badge">NEW</span> Topic 3A: AI Coding for Dynamic Equilibrium Models</a>
+					<ul>
+						<li><a href="#hands-on-3a">Hands-On Session: Claude Code Workflow for Macro Models</a></li>
+						<li><a href="#topic-3a-project">Starter Project: <code>my-macro-project.zip</code></a></li>
+					</ul>
+				</li>
 				<li><a href="#topic-4">Topic 4: Numerical Methods for Macroeconomists</a>
 					<ul><li><a href="#hands-on-4">Hands-On Session: Implementing Core Numerical Methods</a></li></ul>
 				</li>
@@ -392,6 +424,7 @@
 				<li><a href="Slides/Lec_2026_7_Dynamic_models.pdf" target="_blank">Lecture 7: Dynamic Models</a></li>
 				<li><a href="Slides/Lec_2026_8_Advanced_methods_accuarcy.pdf" target="_blank">Lecture 8: Advanced Methods & Accuracy</a></li>
 				<li><a href="Slides/Lec_2026_9_Pert_Proj.pdf" target="_blank">Lecture 9: Perturbation & Projection</a></li>
+				<li><a href="Slides/Lec_2026_11_ML_HA_models.pdf" target="_blank">Lecture 11: ML Approaches for Heterogeneous-Agent Models</a></li>
 			</ul>
 		</div>
 
@@ -411,6 +444,7 @@
 				<li><a href="Notebooks/Lab11A_KS1998_Pytorch.ipynb" target="_blank">Lab 11A: Krusell-Smith (PyTorch)</a></li>
 				<li><a href="Notebooks/Lab12_OLG.ipynb" target="_blank">Lab 12: OLG Models</a></li>
 				<li><a href="Notebooks/Lab13_Asset_pricing.ipynb" target="_blank">Lab 13: Asset Pricing with ML</a></li>
+				<li id="topic-3a-project"><a href="Notebooks/my-macro-project.zip" target="_blank">Claude Code Starter Project: my-macro-project.zip</a></li>
 			</ul>
 		</div>
 		<p class="topic-note">Note: Jupyter notebooks can be viewed directly on GitHub or downloaded and run locally with Python/Anaconda.</p>
@@ -600,6 +634,60 @@
 				</ul>
 			</div>
 			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+		</div>
+
+		<div class="topic-highlight">
+			<h3 id="topic-3a"><span class="highlight-badge">NEW 2026</span> Topic 3A: AI Coding for Dynamic Equilibrium Models</h3>
+			<p class="topic-note" style="margin-top: 8px; font-style: normal;">
+				<strong>Slide deck:</strong> <a href="Slides/Lec_2026_3A_AI_Coding.pdf" target="_blank">Lec_2026_3A_AI_Coding.pdf</a>
+			</p>
+			<p>This lecture formalizes a practical "Research Architect" workflow for AI-assisted macro coding. The key idea is to separate <strong>algorithm design</strong> from <strong>code implementation</strong>: economists define theory, numerical method, and validation criteria; AI tools (especially Claude Code) handle implementation loops under supervision.</p>
+			<h4>Conceptual Content</h4>
+			<ul>
+				<li>The five foundations before delegating coding to AI:
+					<ul>
+						<li>Economic theory, algorithm design, numerical methods, advanced methods, and code literacy.</li>
+					</ul>
+				</li>
+				<li>Tool division of labor:
+					<ul>
+						<li>Claude chatbox for design/reasoning, Cursor for IDE support, Claude Code for autonomous multi-file implementation and debugging.</li>
+					</ul>
+				</li>
+				<li>Core iterative workflow:
+					<ul>
+						<li>Design Algorithm → Implement Code → Validate → Extend → Repeat.</li>
+						<li>Build versions incrementally (RBC and Aiyagari examples) with benchmark checks and Euler residual diagnostics.</li>
+					</ul>
+				</li>
+				<li>Project engineering with Claude Code:
+					<ul>
+						<li><code>CLAUDE.md</code> for project context, <code>.claude/skills</code> for reusable workflows, <code>.claude/agents</code> for specialized reviewers, and <code>.claude/rules</code> for always-on constraints.</li>
+					</ul>
+				</li>
+			</ul>
+
+			<div class="hands-on-box">
+				<h4 id="hands-on-3a">🛠️ Hands-On Session: Claude Code Workflow for Macro Models</h4>
+				<div class="hands-on-section">
+					<strong>Objective:</strong>
+					<p>Use Claude Code to implement and validate a dynamic equilibrium model with a structured, specification-first workflow.</p>
+				</div>
+				<div class="hands-on-section">
+					<strong>Learning Outcome:</strong>
+					<p>Students will be able to convert an economic specification into a reproducible AI coding pipeline, enforce validation gates, and organize project memory with skills/agents/rules.</p>
+				</div>
+				<div class="hands-on-section">
+					<strong>Activities:</strong>
+					<ul>
+						<li>Start from the provided template: <a href="Notebooks/my-macro-project.zip" target="_blank"><code>Notebooks/my-macro-project.zip</code></a>.</li>
+						<li>Implement a baseline model version with explicit convergence and Euler-error diagnostics.</li>
+						<li>Add one extension feature at a time and validate each version before moving forward.</li>
+						<li>Run specialized review checks for numerical stability and economic consistency.</li>
+					</ul>
+				</div>
+				<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
+			</div>
 		</div>
 		
 		<h3 id="topic-4">Topic 4: Numerical Methods for Macroeconomists</h3>
@@ -1021,37 +1109,35 @@
 		</div>
 
 		<h3 id="topic-11">Topic 11: Heterogeneous Agents Models with Machine Learning</h3>
+		<p class="topic-note" style="font-style: normal;"><span class="highlight-badge">UPDATED 2026</span>Slide deck: <a href="Slides/Lec_2026_11_ML_HA_models.pdf" target="_blank">Lec_2026_11_ML_HA_models.pdf</a></p>
 		<h4>Conceptual Content</h4>
 		<ul>
-			<li>Core Frameworks:
+			<li>Foundations in Aiyagari–Bewley–Huggett:
 				<ul>
-					<li>Aiyagari–Bewley–Huggett models: incomplete markets and idiosyncratic risk.</li>
-					<li>Krusell–Smith models: heterogeneous agents with aggregate shocks.</li>
-					<li>Recursive competitive equilibrium and distribution as state variable.</li>
+					<li>Stationary Recursive Competitive Equilibrium (SRCE) and market clearing.</li>
+					<li>Existence/uniqueness of invariant distributions (Feller, mixing, monotonicity conditions).</li>
+					<li>Economic interpretation of precautionary savings and wealth inequality.</li>
 				</ul>
 			</li>
-			<li>Traditional Methods:
+			<li>Canonical computational pipeline:
 				<ul>
-					<li>Computing stationary distributions via discretization and forward iteration.</li>
-					<li>Simulation-based approaches and histogram methods.</li>
-					<li>Interpolation over distributions (moment-based, histogram-based).</li>
-					<li>Challenges and limitations of local approaches in dynamic settings.</li>
-					<li>Computational burden of high-dimensional state spaces.</li>
+					<li>For a fixed interest rate, solve household policy functions.</li>
+					<li>Compute stationary distributions from the induced transition kernel.</li>
+					<li>Update prices until excess demand for capital is near zero.</li>
 				</ul>
 			</li>
-			<li>Machine Learning for Global Solutions:
+			<li>Global solution with deep learning and RL ideas:
 				<ul>
-					<li>DeepHAM framework: neural networks to approximate value/policy functions.</li>
-					<li>Handling high-dimensional state spaces (wealth, productivity, aggregate states).</li>
-					<li>Training strategies and loss function design.</li>
-					<li>Use of PyTorch and advanced ML libraries.</li>
+					<li>Actor-critic style updates for value and policy networks.</li>
+					<li>Distribution-aware state representation and simulation-based training.</li>
+					<li>Transition from stationary equilibrium analysis to full distributional dynamics.</li>
 				</ul>
 			</li>
-			<li>Reinforcement Learning Extensions (Feng et al., 2025):
+			<li>Krusell-Smith with modern ML methods:
 				<ul>
-					<li>Actor-critic algorithms for end-to-end solution of heterogeneous-agent models.</li>
-					<li>Analytical characterization of distributional dynamics.</li>
-					<li>Simultaneous learning of individual policies and aggregate behavior.</li>
+					<li>DeepHAM: two-network setup (value + policy), Monte Carlo simulation, and fictitious-play updates.</li>
+					<li>DEQN: Euler-equation-based method with a single policy network and cloud simulation across many economies.</li>
+					<li>DeepHAM vs. DEQN trade-off: richer distribution representation vs. simpler Euler-residual training.</li>
 				</ul>
 			</li>
 		</ul>
@@ -1060,28 +1146,21 @@
 			<h4 id="hands-on-11">🛠️ Hands-On Session: Solving Aiyagari and Krusell-Smith Models</h4>
 			<div class="hands-on-section">
 				<strong>Objective:</strong>
-				<p>Implement both traditional and ML-based solution methods for heterogeneous agent models, starting with the Aiyagari model and extending to the Krusell-Smith framework with aggregate shocks.</p>
+				<p>Implement and compare stationary and global solution methods for heterogeneous-agent models, from canonical Aiyagari to Krusell-Smith with aggregate shocks.</p>
 			</div>
 			<div class="hands-on-section">
 				<strong>Learning Outcome:</strong>
-				<p>Students will be able to solve for stationary equilibria in incomplete markets models, compute wealth distributions using forward iteration, implement neural network approximations for high-dimensional state spaces, handle aggregate shocks using Krusell-Smith forecasting rules, and compare traditional vs. ML solution accuracy and computational efficiency.</p>
+				<p>Students will be able to compute SRCEs, diagnose distributional dynamics, train DeepHAM-style value/policy approximations, and implement Euler-equation-based DEQN training with cloud simulation.</p>
 			</div>
 			<div class="hands-on-section">
 				<strong>Activities:</strong>
 				<ul>
-					<li>Setting up the Aiyagari model: preferences, technology, borrowing constraints.</li>
-					<li>Discretizing idiosyncratic productivity shocks.</li>
-					<li>Implementing VFI for individual problem at given interest rate.</li>
-					<li>Computing wealth distribution via forward iteration of the transition matrix.</li>
-					<li>Equilibrium computation: nested fixed-point algorithm over interest rate.</li>
-					<li>Analyzing wealth inequality: Gini coefficients, Lorenz curves.</li>
-					<li>Extending to Krusell-Smith with aggregate productivity shocks.</li>
-					<li>Implementing neural networks to approximate policy functions over (wealth, individual shock, aggregate shock).</li>
-					<li>Learning approximate aggregate laws of motion (ALM) for capital.</li>
-					<li>Training algorithm: alternating between policy learning and ALM updating.</li>
-					<li>Validating solutions: testing accuracy of ALM, Euler equation errors.</li>
-					<li>Simulating model economies and computing impulse responses.</li>
-					<li>Comparing traditional vs. DeepHAM approaches: accuracy, speed, scalability.</li>
+					<li>Build the canonical Aiyagari loop: policy solution, stationary distribution, and market-clearing interest rate.</li>
+					<li>Check uniqueness/convergence assumptions and numerical robustness of the stationary solver.</li>
+					<li>Extend to Krusell-Smith and treat the distribution (or moments) as evolving state variables.</li>
+					<li>Train DeepHAM (value + policy networks) and track learning stability across iterations.</li>
+					<li>Train DEQN by minimizing Euler residuals with cloud simulation over many parallel economies.</li>
+					<li>Compare DeepHAM and DEQN on accuracy, speed, and scalability in high-dimensional settings.</li>
 				</ul>
 			</div>
 			<a href="#toc" class="back-to-top">▲ Return to Table of Contents</a>
